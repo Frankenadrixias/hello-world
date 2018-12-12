@@ -1,21 +1,91 @@
-/*æ»¡è¶³ä¸‹åˆ—æ¡ä»¶çš„è‡ªç„¶æ•°ç§°ä¸ºè¶…çº§ç´ æ•°:è¯¥æ•°æœ¬èº«,æ‰€æœ‰æ•°å­—ä¹‹å’Œ,æ‰€æœ‰æ•°å­—ä¹‹ç§¯ä»¥åŠæ‰€æœ‰æ•°å­—çš„å¹³æ–¹å’Œéƒ½æ˜¯ç´ æ•°.ä¾‹å¦‚113å°±æ˜¯ä¸€ä¸ªè¶…çº§ç´ æ•°.æ±‚[100,9999]ä¹‹å†…:(1)è¶…çº§ç´ æ•°çš„ä¸ªæ•°.(2)æ‰€æœ‰è¶…çº§ç´ æ•°ä¹‹å’Œ.(3)æœ€å¤§çš„è¶…çº§ç´ æ•°.*/
-int sum_bit(int num) {
-  return 0;
+/*Âú×ãÏÂÁĞÌõ¼şµÄ×ÔÈ»Êı³ÆÎª³¬¼¶ËØÊı:
+¸ÃÊı±¾Éí,ËùÓĞÊı×ÖÖ®ºÍ,ËùÓĞÊı×ÖÖ®»ıÒÔ¼°ËùÓĞÊı×ÖµÄÆ½·½ºÍ¶¼ÊÇËØÊı.
+ÀıÈç113¾ÍÊÇÒ»¸ö³¬¼¶ËØÊı.
+Çó[100,9999]Ö®ÄÚ:
+(1)³¬¼¶ËØÊıµÄ¸öÊı.
+(2)ËùÓĞ³¬¼¶ËØÊıÖ®ºÍ.
+(3)×î´óµÄ³¬¼¶ËØÊı.*/
+//2018/11/14 ¸üĞÂ
+#include <stdio.h> 
+int sum_bit(int num)
+{
+	int n[100],i=0,k=0,s=0;
+	while(num>0)
+	{
+		n[i]=num%10;
+		num=num/10;
+		k=k+1;
+		i=i+1;
+	}
+	for(i=k-1;i>=0;i--)
+	{
+		s=s+n[i];
+	}
+	return s;
 }
-
-int multi_bit(int num) {
-  return 0;
+int multi_bit(int num)
+{
+	int n[100],i=0,k=0,s=1;
+	while(num>0)
+	{
+		n[i]=num%10;
+		num=num/10;
+		k=k+1;
+		i=i+1;
+	}
+	for(i=k-1;i>=0;i--)
+	{
+		s=s*n[i];
+	}
+	return s;
 }
-
-int square_sum_bit(int num) {
-  return 0;
+int square_sum_bit(int num)
+{
+	int n[100],i=0,k=0,s=0;
+	while(num>0)
+	{
+		n[i]=num%10;
+		num=num/10;
+		k=k+1;
+		i=i+1;
+	}
+	for(i=k-1;i>=0;i--)
+	{
+		s=s+n[i]*n[i];
+	}
+	return s;
 }
-
-bool isprime(int num) {
-  return false;
+int isprime(int num)
+{
+	int t=1;
+	do{
+		t=t+1;
+	} while(num%t!=0&&t<=num);
+	if(t==num)
+	{
+		return 1;
+	}
+	return 0;
 }
-
-int main() {
-  if(isprime(113)&&isprime(sum_bit(113))&&isprime(multi_bit(113))&&isprime(square_sum_bit(113)))
-    //to do sth
+int main()
+{
+	int i,a,b,k=0,t=0,sum=0;
+	printf("ÇëÊäÈëËùÇó³¬¼¶ËØÊıÏÂ½ç(º¬)£º");
+	scanf("%d",&a);
+	printf("ÇëÊäÈëËùÇó³¬¼¶ËØÊıÉÏ½ç(²»º¬)£º");
+	scanf("%d",&b);
+	for(i=a;i<b;i++)
+	{ 
+		if(isprime(i)>0&&isprime(sum_bit(i))>0&&isprime(multi_bit(i))>0&&isprime(square_sum_bit(i))>0)
+		{
+			printf("%d\n",i);
+			t=t+1;
+			sum=sum+i;
+			k=i;
+		}
+	} 
+	printf("ÔÚÇø¼ä%dµ½%dµÄËØÊı¹²ÓĞ%d¸ö\n",a,b,t);
+	printf("ÕâĞ©³¬¼¶ËØÊıµÄºÍÎª£º%d\n",sum);
+	printf("ÕâÖ®ÖĞ×î´óµÄ³¬¼¶ËØÊıÎª£º%d\n",k);
+	return 0;
 }
